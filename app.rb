@@ -17,7 +17,9 @@ db_params = YAML.load(erb_yaml.result(binding()))[rack_env]
 set :database, db_params
 
 get '/' do
-  @start, @end = '12/31/2012 0:00:00', '8/1/2013 0:00:00'
+  first_cohort = Cohort.order(:cohort_date).first.cohort_date
+  last_cohort = Cohort.order(:cohort_date).last.cohort_date + 1.week
+  @start, @end = [first_cohort, last_cohort].map {|c| c.strftime('%-m/%-d/%Y 0:00:00') }
   erb :new, layout: :layout
 end
 
