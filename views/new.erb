@@ -1,0 +1,19 @@
+<form id="cohort-report-form" action="cohort_report" method="POST">
+  <div class="form-group">
+    <label>Find cohorts starting between</label>
+  </div>
+
+  <div class="form-group">
+    <label for="startdate">Start</label>
+    <input type="text" id="startdate" name="startdate" require="required" value="<%= @start %>">
+  </div>
+  <div class="form-group">
+    <label for="startdate">End</label>
+    <input type="text" id="startdate" name="enddate" require="required" value="<%= @end %>">
+  </div>
+  <div class="form-group">
+    <button type="submit">
+      <i class="fa fa-sign-in fa-lg"></i>&nbsp;&nbsp;Generate
+    </button>
+  </div>
+</form>

@@ -1,0 +1,38 @@
+<%= erb :new %>
+
+<h3>Report: <%= @start %> to <%= @end %></h3>
+
+<table>
+  <thead>
+  <th>Cohort</th>
+  <th>Users</th>
+  <th>Totals</th>
+  <% @buckets.each do |b| %>
+    <th><%= b %> - <%= b + 7 %> days</th>
+  <% end %>
+  </thead>
+  <tbody>
+  <% @cohorts.each do |co| %>
+    <tr>
+      <td><p><strong><%= co.format_cohort_date(header: true) %></strong></p></td>
+      <td><p><strong><%= co.cohort_count %></strong>&nbsp;Users</p></td>
+      <td>
+        <p><strong><%= first_time_orderers = @first_time_orderers[co.cohort_date.to_s][:total] %>&nbsp;(<%= format_percentage(first_time_orderers, co.cohort_count) %>%)</strong>&nbsp;Ordered</p>
+      </td>
+      <% @buckets.each do |b| %>
+        <td>
+          <p><% if @orderers[co.cohort_date.to_s][b] %>
+            <strong><%= orderers = @orderers[co.cohort_date.to_s][b] %>&nbsp;(<%= format_percentage(orderers, co.cohort_count) %>%)</strong>&nbsp;Orderers
+          <% end %></p>
+          <p><% if @first_time_orderers[co.cohort_date.to_s][b] %>
+            <strong><%= first_time_orderers = @first_time_orderers[co.cohort_date.to_s][b] %>&nbsp;(<%= format_percentage(first_time_orderers, co.cohort_count) %>%)</strong>&nbsp;1st&nbsp;Time
+          <% else # tried to avoid the else tag, but layout gets screwed without it %>
+            &nbsp;
+          <% end %></p>
+        </td>
+      <% end %>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+
