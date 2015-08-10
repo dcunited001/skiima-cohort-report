@@ -37,6 +37,12 @@ namespace :db do
   task :load => :connection do
     puts("psql #{ActiveRecord::Base.connection} <")
   end
+
+  desc 'generate seeds for database'
+  task :seed => :"cohort:env" do
+    seed_file = 'db/seeds.rb'
+    load(seed_file) unless defined? DB_SEED_FINISHED
+  end
 end
 
 namespace :cohort do
