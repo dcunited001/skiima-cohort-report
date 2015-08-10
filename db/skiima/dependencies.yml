@@ -1,0 +1,23 @@
+cohort_report:
+  postgresql:
+    current:
+      - fn.get_bucket_from_order_date
+      - view.orderers
+      - view.cohorts
+      - view.first_time_orders
+      - view.first_time_orderers
+
+# needed a workaround for my skiima gem because it's not generating the correct view names
+# when using the drop helpers in skiima.  it's tries to drop orderers instead of view_orderers
+drop_scripts:
+  postgresql:
+    current:
+      - fn.get_bucket_from_order_date
+      - view.view_orderers
+      - view.view_cohorts
+      - view.view_first_time_orders
+      - view.view_first_time_orderers
+      - view.view_cohort_report
+
+default:
+  - cohort_report
