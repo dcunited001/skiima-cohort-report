@@ -43,7 +43,7 @@ namespace :cohort do
   desc 'load the cohort application environment'
   task :env do
     require './app'
-    require 'sinatra/activerecord/rake' # honestly this isn't going to work
+    require 'sinatra/activerecord/rake'
   end
 end
 
