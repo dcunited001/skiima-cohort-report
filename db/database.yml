@@ -1,0 +1,20 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+  encoding: utf8
+  username: <%= ENV.fetch('COHORT_DB_USERNAME', 'cohort') %>
+  password: <%= ENV.fetch('COHORT_DB_PASSWORD', 'password') %>
+
+development:
+  <<: *default
+  database: cohort_development
+
+test:
+  <<: *default
+  database: cohort_test
+
+production:
+  <<: *default
+  database: cohort_production
+  password: <%= ENV['COHORT_DB_PASSWORD'] %>
